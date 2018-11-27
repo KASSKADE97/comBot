@@ -153,11 +153,7 @@ async function deleteGood(id) {
 }
 
 //common (1-3)
-async function exit() {}
-
-async function print() {}
 //для менеджера
-//не готово
 async function checkOrderBill(orderId, billId) {
     const getOrder = await connection.execute(`
         SELECT  (orders.id) orderId, (orders.summ) orderSumm, (orders.order_date) orderDate,
