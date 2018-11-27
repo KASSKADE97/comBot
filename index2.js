@@ -110,10 +110,6 @@ async function getBill(Id){
      bill.items = items;
     return bill;
 }
-//не готово
-async function billReestrConfirmed() {
-    
-} //получение счет-фактур (от менеджера) для подтверждения
 
 async function billConfirmation(id) {
     const billID = id;
