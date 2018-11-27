@@ -51,8 +51,6 @@ async function registration(id, name, pass, role) {
     console.dir(quer);
 }
 
-async function login(id, pass) {}
-//для начальства
 async function billHistory() {
     const quer = await connection.query(`
         SELECT bill.id, bill.bill_date, distributors.name, bill.summ, bill.payment FROM bill 
