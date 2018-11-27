@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Прибыльная накладная</title>
+ 
+  <link rel="stylesheet" href="style.css" type="text/css">
+</head>
+ 
+<body>
+	<h1 align="center">Прибыльная накладная <%= naklad.id%></h1>
+  <div class="page">
+    <!-- TOP TABLE -->
+    <table id="top-table">
+      <tr>
+        <td>
+          <div id="first"><p>Дата: <%= naklad.date%></p>
+          <p>Склад: <%= naklad.warehouse%></p></div>
+		  
+		  <div id="table2">
+			  <p>Поставщик: <%= naklad.distName%></p>
+			  <p>Код ЕДРПУ: <%= naklad.distCode%></p>
+			  <p>Адрес: <%= naklad.distAdress%></p>
+		  </div>
+
+
+        </td>
+        <td>
+		<h1></h1>
+          <table id="invoice-info-table">
+            <tr>
+              <th>Получатель</th>
+              <td>Адрес,телефон,код ___________________________________</td>
+            </tr>
+
+
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr class="spacer"></tr>
+     
+    </table>
+ 
+    <!-- TOTAL TABLE -->
+    <style type="text/css">
+    .tg  {border-collapse:collapse;border-spacing:0;}
+    .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+    .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+    .tg .tg-baqh{text-align:center;vertical-align:top}
+    .tg .tg-c3ow{border-color:inherit;text-align:center;vertical-align:top}
+    </style>
+    <table class="tg">
+      <tr>
+        <th class="tg-c3ow">Артикул</th>
+        <th class="tg-baqh">Наименование</th>
+        <th class="tg-baqh">Ед.Измерения</th>
+        <th class="tg-baqh">Количество</th>
+        <th class="tg-baqh">Цена</th>
+        <th class="tg-baqh">Сумма</th>
+      </tr>
+      <% for(const item of naklad.goods){ %>
+      <tr>
+        <td class="tg-baqh"><%= item.id%></td>
+        <td class="tg-baqh"><%= item.name%></td>
+        <td class="tg-baqh"><%= item.measure%></td>
+        <td class="tg-baqh"><%= item.amount%></td>
+        <td class="tg-baqh"><%= item.price%></td>
+        <td class="tg-baqh"><%= item.summTov%></td>
+      </tr>
+      <% } %>
+      <tr>
+        <td class="tg-baqh" colspan="4">Всего без НДС</td>
+        <td class="tg-baqh" colspan="2"><%= naklad.summNoPDS%></td>
+      </tr>
+      <tr>
+        <td class="tg-baqh" colspan="4">Всего с НДС</td>
+        <td class="tg-baqh" colspan="2"><%= naklad.summ%></td>
+      </tr>
+    </table>
+
+
+    <!-- BOTTOM TABLE -->
+    <table id="bottom-table" border=1 width=80%> 
+      <tr>
+        <td>
+          <h4>Принял ____________________________________________ Ф.И.О</h4>
+
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <h4>Сдал_______________________________________________  Ф.И.О</h4>
+
+        </td>
+      </tr>
+    </table>
+  </div>
+</body>
+ 
+</html>

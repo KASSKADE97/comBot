@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Форма заказа</title>
+        <link rel="stylesheet" href="styles.css" type="text/css">
+    </head>
+    <body>
+        <table>
+            <tr>
+              <th>Реестр</th>
+            </tr>
+            <tr>
+              <td>За период с <%=reestr.date1%> до <%=reestr.date2%></td>
+            </tr>
+          </table>
+        <table border="1">
+            <tr>
+              <th>Поставщик</th>
+              <th>Наименование</th>
+              <th>Ед. измерения</th>
+              <th>Количество</th>
+              <th>Цена</th>
+              <th>Сумма</th>
+              <th>Дата поставки</th>
+            </tr>
+            <% for(const item of reestr.goods){%>
+            <tr>
+              <td><%=item.distName%></td>
+              <td><%=item.name%></td>
+              <td><%=item.measure%></td>
+              <td><%=item.amount%></td>
+              <td><%=item.price%></td>
+              <td><%=item.summTov%></td>
+              <td><%=item.date%></td>
+            </tr>
+            <% }%>
+          </table>
+    </body>
+</html>

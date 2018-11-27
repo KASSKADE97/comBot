@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Счёт фактура <%= bill.billId %></title>
+ 
+  <link rel="stylesheet" href="/billing/assets/invoice/styles.css" type="text/css">
+</head>
+ 
+<body>
+	<h1 align="center">Счёт фактура <%=bill.billId %></h1>
+  <div class="page">
+    <!-- TOP TABLE -->
+    <table id="top-table">
+      <tr>
+        <td>
+          <img id=>
+          <p>Счёт фактура <%=bill.billId %></p>
+      <p>Поставщик: <%=bill.distName %></p>
+  		<p>ЕДРПУ: <%=bill.distCode %> </p>
+		  <p>Адрес: <%=bill.distAdress %></p>
+		  <p>Телефон: <%=bill.distTel %></p>
+		  <p>e-mail: <%=bill.distEmail %></p>
+
+
+        </td>
+        <td>
+		<h1></h1>
+          <table id="invoice-info-table">
+            <tr>
+              <th>Получатель</th>
+              <td>ОАО "РОГАЛИК inc.", улица Пушкина, дом Колотушкина</td>
+            </tr>
+            <tr>
+              <th>Платильщик</th>
+              <td>ОАО "РОГАЛИК inc.", улица Пушкина, дом Колотушкина</td>
+            </tr>
+            <tr>
+
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr class="spacer"></tr>
+     
+    </table>
+ 
+    <!-- MIDDLE TABLE -->
+    <!--<table border=1 id="middle-table" width=80%>
+      <tr class="header">
+        <th>Наименование товара</th>
+        <th>Еденица измирения</th>
+        <th>Количество</th>
+        <th class="align-right">Цена без ПДВ</th>
+        <th class="align-right">Сумма без ПДВ</th>
+      </tr>
+     
+
+    </table>
+      -->
+    <!-- TOTAL TABLE -->
+    <table id="total-table" border=1 width="100%">
+      <tr>
+        <th width="26.3%">Наименование товара</th>
+		    <th width="23.9%">Единица измерения</th>
+		    <th width="14.3%">Количество</th>
+		    <th width="16.9%">Цена без ПДВ</th>
+		    <th >Цена ПДВ</th>
+      </tr>
+      <% for(const item of bill.items){%>
+      <tr id="total-row">
+        <td><%= item.name %></td>
+		    <td><%= item.measure %></td>
+		    <td><%= item.amount %></td>
+		    <td><%= item.priceNoPDV %></td>
+		    <td><%= item.price %></td>
+      </tr>
+      <%} %>
+	  <tr id="amount-due-row">
+        <th>Всего без ПДВ</th>
+		<th colspan = 4><%= bill.summNoPDV%></th>
+      </tr>
+	  <tr id="amount-due-row">
+        <th>Всего c ПДВ</th>
+		<th colspan = 4><%= bill.summPDV%></th>
+      </tr>
+    </table>
+ 
+    <div class="spacer"></div>
+ 
+    <!-- BOTTOM TABLE -->
+    <table id="bottom-table">
+      <tr>
+        <td>
+          <h4>Всего на сумму (прописью) ____________________________________________ грн ____ коп.</h4>
+
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <h4>Директор_____________________________  Главный Бухгалтер_____________________</h4>
+
+        </td>
+      </tr>
+    </table>
+  </div>
+</body>
+ 
+</html>

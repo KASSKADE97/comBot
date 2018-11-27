@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Форма заказа</title>
+        <link rel="stylesheet" href="styles.css" type="text/css">
+    </head>
+    <body>
+        <table>
+            <tr>
+                <th></th>
+                <th>Заказ:</th>
+            </tr>
+            <tr>
+                <td>Поставщик <%= order.distName%></td>
+                <td>номер <%= order.id %></td>
+            </tr>
+            <tr>
+                <td>Покупатель: NiCE Company </td>
+                <td>Дата: <%=order.date%></td>
+            </tr>
+        </table>
+        <table border="1">
+            <tr>
+                <th>Наименование</th>
+                <th>Ед.измерения</th>
+                <th>Количество</th>
+                <th>Цена</th>
+                <th>Сумма</th>
+            </tr>
+            <% for(const item of order.goods){%>
+            <tr>
+                <td><%= item.name%></td>
+                <td><%= item.measure%></td>
+                <td><%= item.amount%></td>
+                <td><%= item.price%></td>
+                <td><%= item.summTov%></td>
+            </tr>
+            <%}%>
+            <tr>
+                <td colspan="3">Сумма заказа</td>
+                <td colspan="2"><%=order.summ%></td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <th>Начальник отдела закупок</th>
+                <th></th>
+            </tr>
+            <tr>
+                <td>Менеджер по закупкам</td>
+                <td></td>
+            </tr>
+        </table>
+    </body>
+</html>
