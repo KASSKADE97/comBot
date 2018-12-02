@@ -452,7 +452,8 @@ async function botInit() {
         const chatId = msg.chat.id;
         const user = await checkUsers(chatId);
         console.dir(user);
-        if (user) {
+        if(user[0].password_ != undefined) {
+            console.log('123')
             await bot.sendMessage(chatId, `Доброго времени суток, ${user[0].login}\nДля просмотра списка доступных команд введите /main`);
             return;
         }
@@ -466,16 +467,14 @@ async function botInit() {
         const role = match[1];
         const pass = msg.chat.id;
         await registration(chatId, name, pass, role);
-        await bot.sendMessage(chatId, 'Вы успешно зарегестрированы в системе как ' + match[1] + '. Чтобы посмотреть список доступных команд введите /commList');
-
-        // if (!chatStatuses.has(chatId))
+        await bot.sendMessage(chatId, 'Вы успешно зарегестрированы в системе как ' + match[1] + '. Чтобы посмотреть список доступных команд введите /main');
 
         chatStatuses.delete(chatId);
-        console.log('darov');
     });
     bot.onText(/\/main/, async (msg) => {
         const chatId = msg.chat.id;
         const login = await checkUsers(chatId);
+        console.dir(login);
         if(login[0].role == 'lead'){
             await bot.sendMessage(chatId,`Список доступных команд:`);
             await bot.sendMessage(chatId, `/billList - списко счет-фактур \n/billsbyDist [имя_поставщика] -список счет-фактур от конкретного поставщика\n/viewCatalog - каталог товаров в наличии \n/getConfirmedBills - список подтвержденных счет-фактур \n/getNaklad - список накладных \n/getUnconfBills - список неподтвержденных счет-фактур \n/orderList - список заказов`)
@@ -538,7 +537,7 @@ async function botInit() {
         const field = Object.keys(good);
 
         for (const item of field) {
-            await bot.sendMessage(id, `${filed}: ${good[field]}`);
+            await bot.sendMessage(id, `${item}: ${good[item]}`);
         }
         await bot.sendMessage(id, `Для редактирования записи воспользуйтейсь командой /edit [id] [field] [new_value]`);
     });
@@ -726,13 +725,9 @@ async function botInit() {
             await bot.sendMessage(chatId, `Команда недоступна`);
             return;
         }
+        await bot.sendMessage(chatId,`net`);
     });
     // /n [billId] [warehouseId] [summ] [name,price,amount name,price,amount name,price,amount...]
-    // deprecated
-    bot.onText(/\/n (.+?) (.+?) (.+?) (.+)/, async(msg,match)=>{
-        const resp = await createNakladBotFunc(msg, match);
-    })
-
     //не готово - составить HTML-страницу 
     bot.onText(/\/incomeDate (.+)/, async (msg,match) => {
         const id = msg.chat.id;
@@ -902,7 +897,6 @@ async function test() {
     //await getOrder(1);
     //await getReestr(date1,date2);
     //await checkOrderBill(4,5);
-    await checkUsers(204521174);
 }
 async function start() {
     await botInit();
@@ -922,7 +916,11 @@ function parseVariable(val) {
 }
 async function checkUsers(id){
     const user = await connection.execute(`SELECT * FROM users WHERE users.password_ = ${id}`);
-    return user[0];
+    console.dir(user[0]);
+    if(user){
+        return user[0];
+    }
+    return;
 }
 async function generatePDF(file){
     const pdf = await Html2Pdf.render({
