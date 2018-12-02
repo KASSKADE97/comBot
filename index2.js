@@ -452,7 +452,7 @@ async function botInit() {
         const chatId = msg.chat.id;
         const user = await checkUsers(chatId);
         console.dir(user);
-        if(user[0].password_ != undefined) {
+        if(user[0] && user[0].password_) {
             console.log('123')
             await bot.sendMessage(chatId, `Доброго времени суток, ${user[0].login}\nДля просмотра списка доступных команд введите /main`);
             return;
@@ -717,7 +717,7 @@ async function botInit() {
         const chatId = msg.chat.id;
         const login = await checkUsers(chatId);
         if(login[0].role === 'worker'){
-            if(match[1] === undefined || match[2] === undefined || match[3] === undefined || match[4] === undefined){
+            if(match.length < 4){
                 const resp = await createNakladBotFunc(msg, match);
                 await bot.sendMessage(chatId, `Успешно`);
             }
